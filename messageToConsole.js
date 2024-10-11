@@ -1,0 +1,1 @@
+export const showCurrentDirectory = process.cwd();
