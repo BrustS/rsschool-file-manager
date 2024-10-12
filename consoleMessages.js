@@ -15,3 +15,7 @@ export const sayHello = () => {
 export const sayGoodbye = () => {
     console.log(`Thank you for using File Manager, ${username}, goodbye!`);
 }
+
+export const errorOperation = () => {
+    console.log('Operation failed');
+}
