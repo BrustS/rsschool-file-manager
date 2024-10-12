@@ -1,12 +1,15 @@
 import * as readline from 'readline/promises';
-import { showCurrentDirectory } from "./messageToConsole.js";
+import { showCurrentDirectory, sayHello, sayGoodbye } from "./consoleMessages.js";
 import { homedir } from "os";
+import { commandCd } from "./commandCd.js";
+import { commandLs } from "./commandLs.js";
 
 const readLine  = readline.createInterface( {
     input: process.stdin,
     output: process.stdout,
 });
-console.log("hi there");
+
+sayHello();
 process.chdir(homedir());
 
 console.log(homedir());
@@ -15,16 +18,25 @@ readLine.on('line', async (input) => {
     try {
         switch (true) {
             case input === 'up': {
-                console.log(`${input} up`);
+               await commandCd("..");
                 break;
             }
 
             case input.startsWith('cd') : {
-                process.chdir(input.slice(3).trim());
+               await commandCd(input.slice(3).trim());
+                break;
+            }
+
+            case input === 'ls': {
+                await commandLs();
+                break;
+            }
+            default: {
+              console.log("Invalid input");
                 break;
             }
         }
-       console.log(showCurrentDirectory);
+      showCurrentDirectory();
     }
     catch (err) {
         console.log(err);
@@ -32,7 +44,7 @@ readLine.on('line', async (input) => {
 });
 
 readLine.on("close", () => {
-    console.log("bye there");
+    sayGoodbye();
     readLine.close();
 });
 
