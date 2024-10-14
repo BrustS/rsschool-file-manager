@@ -5,11 +5,17 @@ import { commandCd } from "./commandCd.js";
 import { commandLs } from "./commandLs.js";
 import { commandCat } from "./commandCat.js";
 import { commandRn} from "./commandRn.js";
-import { commandCpp } from "./commandCp.js";
+import {  commandCp } from "./commandCp.js";
+import { commandRm } from "./commandRm.js";
+import { commandMv } from "./commandMv.js";
+import { commandHash } from "./commandHash.js";
+import { commandCompress } from './commandCompress.js';
+import { commandDecompress } from './commandDecompress.js';
 
 const readLine  = readline.createInterface( {
     input: process.stdin,
     output: process.stdout,
+
 });
 
 sayHello();
@@ -27,12 +33,19 @@ readLine.on('line', async (input) => {
             case input.startsWith('add') : {await commandCat(input.slice(4).trim()); break; }
             case input.startsWith('rn') : { await commandRn(input.slice(3).trim()); break; }
             case input.startsWith('cp') : { await commandCp(input.slice(3).trim()); break; }
+            case input.startsWith('mv') : { await commandMv(input.slice(3).trim()); break; }
+            case input.startsWith('rm') : { await commandRm(input.slice(3).trim()); break; }
+            case input.startsWith('hash') : { await commandHash(input.slice(5).trim()); break; }
+            case input.startsWith('compress') : { await commandCompress(input.slice(9).trim()); break; }
+            case input.startsWith('decompress') : { await commandDecompress(input.slice(11).trim()); break; }
+            case input.startsWith('os'): { await commandOs(input.slice(3).trim()); break; }
+            case input === '.exit': { readLine.close(); break;}
             default: {
               console.log("Invalid input");
                 break;
             }
         }
-      showCurrentDirectory();
+        showCurrentDirectory();
     }
     catch (err) {
         console.log(err);

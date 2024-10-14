@@ -1,6 +1,6 @@
-import { join } from "path";
-import { createReadStream, createWriteStream } from "fs/promises";
-import { errorOperation} from "./consoleMessages.js";
+import { join } from 'path';
+import { createReadStream, createWriteStream } from 'fs';
+import { errorOperation} from './consoleMessages.js';
 
 export const commandCp = async (params) => {
         const paramsArr = params.split(" ");
@@ -15,14 +15,12 @@ export const commandCp = async (params) => {
 
             readStream.pipe(writeStream);
 
-            readStream.on('error', (err) => {
+            readStream.on('error', () => {
                 errorOperation();
             });
 
-            writeStream.on('error', (err) => {
+            writeStream.on('error', () => {
                 errorOperation();
             });
         }
     }
-
-commandCp('rename.js C:\\Users\\Rog');
