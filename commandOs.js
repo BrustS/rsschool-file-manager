@@ -3,7 +3,7 @@ import { EOL, homedir, arch, cpus, userInfo } from 'os'
 export const commandOs =  (params) => {
     switch(params) {
         case '--EOL': {
-            console.log(EOL)
+            console.log(`EOL: ${JSON.stringify(EOL)}`)
             break;}
         case '--cpus': {
             const cpuOnMachine = cpus();
@@ -13,7 +13,7 @@ export const commandOs =  (params) => {
             }
             break;}
         case '--homedir': {
-            console.log(homedir());
+            console.log(`Home dir: ${homedir()}`);
             break;}
         case '--username': {
             console.log(`System username: ${userInfo().username}`);
@@ -29,5 +29,3 @@ export const commandOs =  (params) => {
             }
     }
 }
-
-commandOs('--EOL')

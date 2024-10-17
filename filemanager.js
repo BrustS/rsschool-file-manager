@@ -11,6 +11,8 @@ import { commandMv } from "./commandMv.js";
 import { commandHash } from "./commandHash.js";
 import { commandCompress } from './commandCompress.js';
 import { commandDecompress } from './commandDecompress.js';
+import { commandOs } from './commandOs.js';
+import { commandAdd } from "./commandAdd.js";
 
 const readLine  = readline.createInterface( {
     input: process.stdin,
@@ -20,8 +22,7 @@ const readLine  = readline.createInterface( {
 
 sayHello();
 process.chdir(homedir());
-
-console.log(homedir());
+showCurrentDirectory();
 
 readLine.on('line', async (input) => {
     try {
@@ -30,7 +31,7 @@ readLine.on('line', async (input) => {
             case input.startsWith('cd') : { await commandCd(input.slice(3).trim()); break; }
             case input === 'ls': { await commandLs(); break; }
             case input.startsWith('cat') : {await commandCat(input.slice(4).trim()); break; }
-            case input.startsWith('add') : {await commandCat(input.slice(4).trim()); break; }
+            case input.startsWith('add') : {await commandAdd(input.slice(4).trim()); break; }
             case input.startsWith('rn') : { await commandRn(input.slice(3).trim()); break; }
             case input.startsWith('cp') : { await commandCp(input.slice(3).trim()); break; }
             case input.startsWith('mv') : { await commandMv(input.slice(3).trim()); break; }
@@ -38,8 +39,10 @@ readLine.on('line', async (input) => {
             case input.startsWith('hash') : { await commandHash(input.slice(5).trim()); break; }
             case input.startsWith('compress') : { await commandCompress(input.slice(9).trim()); break; }
             case input.startsWith('decompress') : { await commandDecompress(input.slice(11).trim()); break; }
-            case input.startsWith('os'): { await commandOs(input.slice(3).trim()); break; }
-            case input === '.exit': { readLine.close(); break;}
+            case input.startsWith('os') : { await commandOs(input.slice(3).trim()); break; }
+            case input === '.exit' : { readLine.close();
+                process.exit(0);
+                break;}
             default: {
               console.log("Invalid input");
                 break;

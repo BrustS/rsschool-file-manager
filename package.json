@@ -2,7 +2,7 @@
   "name": "rsschool-file-manager",
   "version": "1.0.0",
   "description": "File Manager",
-  "main": "index.js",
+  "main": "filemanager.js",
   "type": "module",
   "scripts": {
     "start": "node filemanager.js"

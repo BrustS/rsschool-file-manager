@@ -1,12 +1,19 @@
+let username = 'Unknown'
+const args = process.argv.slice(2);
+
+ if (process.env.npm_config_username) {
+     username = process.env.npm_config_username;
+ } else {
+     const usernameArg = args.find(arg => arg.startsWith('--username='));
+     if (usernameArg) {
+         username = usernameArg.split('=')[1];
+     }
+ }
 
 export const showCurrentDirectory = () => {
     console.log(`You are currently in ${process.cwd()}`);
 };
 
-console.log(process.argv);
-//const usernameIndex = process.argv.findIndex('--username');
-//const username = process.argv[usernameIndex+1];
-const username = "Sergey";
 
 export const sayHello = () => {
     console.log(`Welcome to the File Manager, ${username}!`);
